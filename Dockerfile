@@ -9,7 +9,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc
 RUN (DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -q && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -q )
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install python-software-properties software-properties-common
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes -q supervisor openerp cron sudo
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes -q supervisor cron sudo
+RUN DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 apt-get install -y  --allow-unauthenticated openerp
 ADD start.sh /start.sh
 RUN chmod 750 /start.sh
 RUN mkdir -p /var/log/supervisor
