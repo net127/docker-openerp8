@@ -1,4 +1,3 @@
-
 set -e
 
 if [ -f /configured ]; then
@@ -17,6 +16,9 @@ sudo -u postgres $POSTGRESQL_BIN --single \
 sudo -u postgres $POSTGRESQL_BIN --single \
   --config-file=$POSTGRESQL_CONFIG_FILE \
   <<< "ALTER USER openerp WITH PASSWORD 'postgres';" &>/dev/null
+  
+deluser openerp ; adduser --system --quiet --shell=/bin/bash --home=/opt/openerp --gecos 'OpenERP' --group openerp
+
 
 date > /configured
 exec /usr/bin/supervisord
