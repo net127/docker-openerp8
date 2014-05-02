@@ -16,4 +16,5 @@ RUN chmod 750 /start.sh
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 22 8069 8070
+VOLUME ["/var/log/supervisor"]
 CMD ["/bin/bash", "-e", "/start.sh"]
