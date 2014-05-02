@@ -1,6 +1,6 @@
 # openERP 8 container
 # VERSION 0.0.5
-FROM angelrr7702/ubuntu-14.04-sshd
+FROM angelrr7702/docker-ubuntu-14.04-sshd
 MAINTAINER Angel Rodriguez  "angelrr7702@gmail.com"
 RUN echo "deb http://archive.ubuntu.com/ubuntu saucy-backports main restricted " >> /etc/apt/sources.list
 RUN echo "deb http://nightly.openerp.com/trunk/nightly/deb/ ./"  >> /etc/apt/sources.list
