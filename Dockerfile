@@ -1,5 +1,5 @@
 # openERP 8 container
-# VERSION 0.0.5
+# VERSION 0.2.1
 FROM angelrr7702/docker-ubuntu-14.04-sshd
 MAINTAINER Angel Rodriguez  "angelrr7702@gmail.com"
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
