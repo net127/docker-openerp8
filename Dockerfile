@@ -3,7 +3,7 @@
 FROM angelrr7702/docker-ubuntu-14.04-sshd
 MAINTAINER Angel Rodriguez  "angelrr7702@gmail.com"
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
-RUN echo "deb http://nightly.openerp.com/trunk/nightly/deb/ ./"  >> /etc/apt/sources.list
+RUN echo "deb http://nightly.odoo.com/trunk/nightly/deb/ ./"  >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 RUN (DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -q && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -q )
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install python-software-properties software-properties-common
