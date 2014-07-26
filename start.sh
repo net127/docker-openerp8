@@ -17,7 +17,8 @@ sudo -u postgres $POSTGRESQL_BIN --single \
   --config-file=$POSTGRESQL_CONFIG_FILE \
   <<< "ALTER USER openerp WITH PASSWORD 'postgres';" &>/dev/null
   
-deluser openerp ; adduser --system --quiet --shell=/bin/bash --home=/opt/openerp --gecos 'OpenERP' --group openerp
+#deluser openerp 
+adduser --system --quiet --shell=/bin/bash --home=/opt/openerp --gecos 'OpenERP' --group openerp
 sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.3/main/postgresql.conf
 
 date > /configured
