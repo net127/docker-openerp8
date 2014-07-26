@@ -27,7 +27,7 @@ python-feedparser python-reportlab-accel python-zsi python-openssl \
 python-egenix-mxdatetime python-jinja2 python-unittest2 python-mock \
 python-docutils lptools make python-psutil python-paramiko poppler-utils \
 python-pdftools antiword
-RUN &>/dev/null <&-| wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python 
+RUN wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python &>/dev/null <&-
 
 #RUN DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 apt-get install -y  --allow-unauthenticated openerp
 ADD start.sh /start.sh
