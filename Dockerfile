@@ -28,7 +28,10 @@ python-egenix-mxdatetime python-jinja2 python-unittest2 python-mock \
 python-docutils lptools make python-psutil python-paramiko poppler-utils \
 python-pdftools antiword
 
-RUN wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python
+
+#RUN wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python
+RUN git clone https://github.com/odoo/odoo.git
+
 
 RUN mkdir -p /etc/openerp
 RUN mkdir -p /var/log/openerp
