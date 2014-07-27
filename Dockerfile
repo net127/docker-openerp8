@@ -27,8 +27,14 @@ python-feedparser python-reportlab-accel python-zsi python-openssl \
 python-egenix-mxdatetime python-jinja2 python-unittest2 python-mock \
 python-docutils lptools make python-psutil python-paramiko poppler-utils \
 python-pdftools antiword
-RUN wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python &>/dev/null <&-
 
+RUN wget -O- https://raw.githubusercontent.com/odoo/odoo/master/odoo.py | python
+
+RUN mkdir -p /etc/openerp
+RUN mkdir -p /var/log/openerp
+RUN cp /odoo/odoo/debian/openerp.logrotate /etc/logrotate.d/openerp-server
+RUN cp /odoo/odoo/debian/openerp-server.conf /etc/openerp/openerp-server.conf
+ 
 #RUN DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 apt-get install -y  --allow-unauthenticated openerp
 ADD start.sh /start.sh
 RUN chmod 750 /start.sh
