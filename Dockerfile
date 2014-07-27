@@ -34,7 +34,7 @@ RUN mkdir -p /etc/openerp
 RUN mkdir -p /var/log/openerp
 RUN cp /odoo/odoo/debian/openerp.logrotate /etc/logrotate.d/openerp-server
 RUN cp /odoo/odoo/debian/openerp-server.conf /etc/openerp/openerp-server.conf
- 
+RUN echo "addons_path = /odoo/odoo/addons" >> /etc/openerp/openerp-server.conf
 #RUN DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 apt-get install -y  --allow-unauthenticated openerp
 ADD start.sh /start.sh
 RUN chmod 750 /start.sh
