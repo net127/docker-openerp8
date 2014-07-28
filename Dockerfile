@@ -22,7 +22,8 @@ python-feedparser python-reportlab-accel python-zsi python-openssl \
 python-egenix-mxdatetime python-jinja2 python-unittest2 python-mock \
 python-docutils lptools make python-psutil python-paramiko poppler-utils \
 python-pdftools antiword
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install python-software-properties 
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q  python-colorama python-distlib python-html5lib python-pip
 
 RUN git clone https://github.com/odoo/odoo.git
 
