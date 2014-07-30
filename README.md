@@ -16,3 +16,6 @@ for ssh access login : root password: rootprovisional ==> replace password when 
 
 note: still try to make to work .... no ready for use at the moment ...
 note: OpenERP8 Don't have any modules ... but you can add them by "you must put them in a directory (eg /opt/openerp/addons) that the openerp user and/or group has permission to read and write to and update the addon_path in the config file."
+
+
+I will wait for that odoo finish to move from openerp ...
