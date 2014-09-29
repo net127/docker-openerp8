@@ -11,7 +11,7 @@ ENV HOME /root
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
 RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./"  >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-RUN apt-get update && apt-get install -y -q python-software-properties \
+RUN apt-get update && apt-get install -y -q --force-yes python-software-properties \
                                             software-properties-common \
                                             postgresql \
                                             odoo \
