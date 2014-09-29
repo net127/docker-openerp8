@@ -1,42 +1,64 @@
-# Odoo (openERP 8) container
-# VERSION 0.2.1
-FROM angelrr7702/docker-ubuntu-14.04-sshd
-MAINTAINER Angel Rodriguez  "angelrr7702@gmail.com"
+#name of container: docker-odoo
+#versison of container: 0.0.1
+FROM quantumobject/docker-baseimage
+MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
+
+# Set correct environment variables.
+ENV HOME /root
+
+#add repository and update the container
+#Installation of nesesary package/software for this containers...
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
+RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./"  >> /etc/apt/sources.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+RUN apt-get update && apt-get install -y -q python-software-properties \
+                                            software-properties-common \
+                                            postgresql \
+                                            odoo \
+                    && apt-get clean \
+                    && rm -rf /tmp/* /var/tmp/*  \
+                    && rm -rf /var/lib/apt/lists/*
 
-RUN (DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -q && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -q )
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install python-software-properties software-properties-common
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install postgresql
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes -q supervisor cron sudo
-# package required for odoo no repository install dependence 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install git
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install graphviz ghostscript postgresql-client \
-python-dateutil python-feedparser python-matplotlib \
-python-ldap python-libxslt1 python-lxml python-mako \
-python-openid python-psycopg2 python-pybabel python-pychart \
-python-pydot python-pyparsing python-reportlab python-simplejson \
-python-tz python-vatnumber python-vobject python-webdav \
-python-werkzeug python-xlwt python-yaml python-imaging
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install gcc python-dev mc bzr python-setuptools python-babel \
-python-feedparser python-reportlab-accel python-zsi python-openssl \
-python-egenix-mxdatetime python-jinja2 python-unittest2 python-mock \
-python-docutils lptools make python-psutil python-paramiko poppler-utils \
-python-pdftools antiword
+#General variable definition....
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q  python-colorama python-distlib python-html5lib python-pip
+##startup scripts  
+#Pre-config scrip that maybe need to be run one time only when the container run the first time .. using a flag to don't 
+#run it again ... use for conf for service ... when run the first time ...
+RUN mkdir -p /etc/my_init.d
+COPY startup.sh /etc/my_init.d/startup.sh
+RUN chmod +x /etc/my_init.d/startup.sh
 
-RUN git clone https://github.com/odoo/odoo.git
 
-RUN mkdir -p /etc/openerp
-RUN mkdir -p /var/log/openerp
-RUN cp /odoo/debian/openerp.logrotate /etc/logrotate.d/openerp-server
-RUN cp /odoo/debian/openerp-server.conf /etc/openerp/openerp-server.conf
-RUN echo "addons_path = /odoo/addons" >> /etc/openerp/openerp-server.conf
+##Adding Deamons to containers
+#refers to dockerfile_reference
 
-ADD start.sh /start.sh
-RUN chmod 750 /start.sh
-RUN mkdir -p /var/log/supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 22 8069 8070
-VOLUME ["/var/log/supervisor"]
-CMD ["/bin/bash", "-e", "/start.sh"]
+#pre-config scritp for different service that need to be run when container image is create 
+#maybe include additional software that need to be installed ... with some service running ... like example mysqld
+COPY pre-conf.sh /sbin/pre-conf
+RUN chmod +x /sbin/pre-conf \
+    && /bin/bash -c /sbin/pre-conf \
+    && rm /sbin/pre-conf
+
+#down/shutdown script ... use to be run in container before stop or shutdown .to keep service..good status..and maybe
+#backup or keep data integrity .. 
+
+##scritp that can be running from the outside using docker-bash tool ...
+## for example to create backup for database with convitation of VOLUME   dockers-bash container_ID backup_mysql
+COPY backup.sh /sbin/backup
+RUN chmod +x /sbin/backup
+VOLUME /var/backups
+
+
+#add files and script that need to be use for this container
+#include conf file relate to service/daemon 
+#additionsl tools to be use internally 
+
+# to allow access from outside of the container  to the container service
+# at that ports need to allow access from firewall if need to access it outside of the server. 
+EXPOSE 8069 8070
+
+#creatian of volume 
+#VOLUME 
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
