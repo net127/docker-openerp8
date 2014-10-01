@@ -1,5 +1,5 @@
 #name of container: docker-odoo
-#versison of container: 0.0.1
+#versison of container: 1.0.0
 FROM quantumobject/docker-baseimage
 MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
@@ -48,10 +48,6 @@ RUN chmod +x /sbin/pre-conf \
 COPY backup.sh /sbin/backup
 RUN chmod +x /sbin/backup
 VOLUME /var/backups
-
-#to add conf for odoo
-#COPY openerp-server.conf /etc/odoo/openerp-server.conf
-#RUN chown odoo:odoo /etc/odoo/openerp-server.conf
 
 # to allow access from outside of the container  to the container service
 # at that ports need to allow access from firewall if need to access it outside of the server. 
