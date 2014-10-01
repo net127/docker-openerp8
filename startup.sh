@@ -24,12 +24,11 @@ else
               <<< "UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8') WHERE datname = 'template1'" &>/dev/null
         /sbin/setuser postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
-                  <<< "CREATE USER openerp WITH SUPERUSER;" &>/dev/null
+                  <<< "CREATE USER odoo WITH SUPERUSER;" &>/dev/null
         /sbin/setuser postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
-                <<< "ALTER USER openerp WITH PASSWORD 'postgres';" &>/dev/null
+                <<< "ALTER USER odoo WITH PASSWORD 'postgres';" &>/dev/null
   
-        adduser --system --quiet --shell=/bin/bash --home=/opt/openerp --gecos 'OpenERP' --group openerp
         sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.3/main/postgresql.conf
       
         #needed to fix problem with ubuntu ... and cron 
