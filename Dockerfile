@@ -51,7 +51,7 @@ VOLUME /var/backups
 
 #to add conf for odoo
 COPY openerp-server.conf /etc/odoo/openerp-server.conf
-#need to change owner to odoo user and odoo group ....
+RUN chown odoo:odoo /etc/odoo/openerp-server.conf
 
 # to allow access from outside of the container  to the container service
 # at that ports need to allow access from firewall if need to access it outside of the server. 
