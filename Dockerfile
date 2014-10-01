@@ -53,8 +53,5 @@ VOLUME /var/backups
 # at that ports need to allow access from firewall if need to access it outside of the server. 
 EXPOSE 8069 8070
 
-#creatian of volume 
-#VOLUME 
-
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
