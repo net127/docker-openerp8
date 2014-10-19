@@ -10,6 +10,10 @@ docker run -d -p 8069 -p 8070 quantumobject/docker-odoo
  
 check with docker ps the port use for 8069 and point your brownser to location ...and log in with: admin is the password for the master management account please replace it first .... 
 
-you can use docker-bash id-container to access the container by the server that running it ... docker-bash is a tool that you can find at :
+To access the container from the server that the container is running :
 
-https://github.com/QuantumObject/docker-tools
+docker exec -it container_id /bin/bash
+
+For more info about odoo (openerp) :
+
+https://www.odoo.com/
