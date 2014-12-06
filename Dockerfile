@@ -9,6 +9,7 @@ ENV HOME /root
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
+RUN wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
 RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./"  >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 RUN apt-get update && apt-get install -y -q --force-yes python-software-properties \
