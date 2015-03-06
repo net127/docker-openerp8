@@ -7,8 +7,8 @@ if [ -f /etc/configured ]; then
         echo 'already configured'
 else
 
-        POSTGRESQL_BIN=/usr/lib/postgresql/9.3/bin/postgres
-        POSTGRESQL_CONFIG_FILE=/etc/postgresql/9.3/main/postgresql.conf
+        POSTGRESQL_BIN=/usr/lib/postgresql/9.4/bin/postgres
+        POSTGRESQL_CONFIG_FILE=/etc/postgresql/9.4/main/postgresql.conf
 
        /sbin/setuser postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
@@ -20,7 +20,7 @@ else
                 --config-file=$POSTGRESQL_CONFIG_FILE \
                 <<< "ALTER USER odoo WITH PASSWORD 'postgres';" &>/dev/null
   
-        sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.3/main/postgresql.conf
+        sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.4/main/postgresql.conf
       
         #needed to fix problem with ubuntu ... and cron 
         update-locale
