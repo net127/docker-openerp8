@@ -1,14 +1,11 @@
 #name of container: docker-odoo
-#versison of container: 1.0.0
+#versison of container: 1.0.1
 FROM quantumobject/docker-baseimage
 MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
-# Set correct environment variables.
-ENV HOME /root
-
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted " >> /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu utopic-backports main restricted " >> /etc/apt/sources.list
 RUN wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
 RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./"  >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
