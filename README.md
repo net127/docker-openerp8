@@ -1,16 +1,46 @@
-docker-openerp8
-===============
+# docker-odoo
 
-Docker container for OpenERP 8
+Docker container for [Odoo (OpenERP 8)][3]
 
+"Odoo is the fastest evolving business software in the world. Odoo has a complete suite of business applications covering all business needs, from Website/Ecommerce down to manufacturing, inventory and accounting, all seamlessly integrated. It is the first time ever a software editor managed to reach such a functional coverage."
 
-To run the container ...
+## Install dependencies
 
-docker run -d -p 22 -p 8069 -p 8070 angelrr7702/docker-openerp8
+  - [Docker][2]
 
-check port and point your brownser to location ...and log in with: admin admin create a new database for each company or entity ... please replace password ..
+To install docker in Ubuntu 14.04 use the commands:
 
+    $ sudo apt-get update
+    $ sudo apt-get install docker.io
 
-for ssh access login : root password: rootprovisional ==> replace password when using it with passwd command
+ To install docker in other operating systems check [docker online documentation][4]
 
-note: OpenERP8 Don't have any modules ... but you can add them by "you must put them in a directory (eg /opt/openerp/addons) that the openerp user and/or group has permission to read and write to and update the addon_path in the config file."
+## Usage
+
+To run container use the command below:
+
+    $ docker run -d -p 8069 -p 8070 quantumobject/docker-odoo
+ 
+## Accessing the Odoo applications:
+
+After that check with your browser at addresses plus the port assigined by docker for port 8069:
+
+  - **http://host_ip:port/**
+ 
+Them you can log-in admin/admin for the master management account. Please change the password.   
+
+To access the container from the server that the container is running :
+
+    $ docker exec -it container_id /bin/bash
+
+## More Info
+
+About Odoo [www.odoo.com][1]
+
+To help improve this container [quantumobject/docker-odoo][5]
+
+[1]:https://www.odoo.com
+[2]:https://www.docker.com
+[3]:https://www.odoo.com/blog/odoo-news-5/post/odoo-8-is-here-181
+[4]:http://docs.docker.com
+[5]:https://github.com/QuantumObject/docker-odoo
