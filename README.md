@@ -21,7 +21,7 @@ To run container use the command below:
 
     $ docker run -d -p 8069 -p 8070 quantumobject/docker-odoo
  
- ## Accessing the Odoo applications:
+## Accessing the Odoo applications:
 
 After that check with your browser at addresses plus the port assigined by docker for port 8069:
 
